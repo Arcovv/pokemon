@@ -1,0 +1,2 @@
+[print_schema]
+file = "pokemon_model/src/dto/schema.rs"
