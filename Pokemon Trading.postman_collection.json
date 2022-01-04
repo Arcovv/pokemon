@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "d68471d5-f02e-42fe-b324-45e5c1fc18a7",
+		"name": "Pokemon Trading",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Fetch orders by trader id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8666/api/traders/1/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8666",
+					"path": [
+						"api",
+						"traders",
+						"1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch orders by card id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8666/api/cards/1/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8666",
+					"path": [
+						"api",
+						"cards",
+						"1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send sell order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"card_id\": 1,\n    \"expected_price\": 150\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8666/api/traders/1/orders/sell",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8666",
+					"path": [
+						"api",
+						"traders",
+						"1",
+						"orders",
+						"sell"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send buy order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"card_id\": 1,\n    \"expected_price\": 130\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8666/api/traders/2/orders/buy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8666",
+					"path": [
+						"api",
+						"traders",
+						"2",
+						"orders",
+						"buy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start matchmaking card",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"card_id\": 1,\n    \"expected_price\": 105\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8666/api/matchmaking/cards/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8666",
+					"path": [
+						"api",
+						"matchmaking",
+						"cards",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
