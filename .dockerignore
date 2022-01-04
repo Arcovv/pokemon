@@ -1,0 +1,6 @@
+target
+docker/
+.env
+.github
+.vscode
+.editorconfig

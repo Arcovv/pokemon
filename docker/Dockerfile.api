@@ -1,0 +1,19 @@
+FROM rust:1.57-buster as builder
+COPY . .
+RUN echo "stable" > rust-toolchain
+RUN cargo build -p pokemon_api
+
+FROM rust:1.57-slim-buster
+WORKDIR /app
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update \
+  && apt-get install -y libpq5 \
+  && apt-get install -y --no-install-recommends tzdata
+RUN TZ=Asia/Taipei \
+  && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
+  && echo $TZ > /etc/timezone \
+  && dpkg-reconfigure -f noninteractive tzdata
+COPY --from=builder /target/debug/pokemon_api .
+EXPOSE 8666
+
+ENTRYPOINT ["/app/pokemon_api"]
