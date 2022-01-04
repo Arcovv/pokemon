@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: elasticsearch
+  namespace: logging
+spec:
+  selector:
+    app: elasticsearch
+  clusterIP: None
+  ports:
+    - name: rest
+      port: 9200
+    - name: inter-node
+      port: 9300
