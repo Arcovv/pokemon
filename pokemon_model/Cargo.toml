@@ -1,0 +1,12 @@
+[package]
+edition = "2021"
+name = "pokemon_model"
+version = "0.1.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+chrono = {version = "0.4", features = ["serde"]}
+diesel = {version = "1.4", features = ["32-column-tables", "chrono", "postgres", "r2d2", "numeric"]}
+strum = "0.18.0"
+strum_macros = "0.18.0"
