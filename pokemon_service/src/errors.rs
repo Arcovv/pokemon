@@ -17,3 +17,21 @@ pub enum CrudError {
   #[error("Failed to delete data")]
   DeleteError,
 }
+
+#[derive(Debug, Error)]
+pub enum UserServiceError {
+  #[error("Encounter CrudError: {0:?}")]
+  CrudError(#[from] CrudError),
+
+  #[error("Wrong password")]
+  WrongPassword,
+
+  #[error("Account existed")]
+  AccountExisted,
+
+  #[error("Account not exist")]
+  AccountNotExist,
+
+  #[error("Hash password error: {0:?}")]
+  HashError(#[from] bcrypt::BcryptError),
+}

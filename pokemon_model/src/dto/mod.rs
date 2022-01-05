@@ -8,4 +8,4 @@ mod users;
 pub use card::Card;
 pub use orders::{InsertOrder, Order};
 pub use traders::{InsertTrader, InsertTraderBalanceLog, Trader};
-pub use users::User;
+pub use users::{InsertUser, User};

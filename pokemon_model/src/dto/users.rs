@@ -12,3 +12,11 @@ pub struct User {
   pub created_at: DateTime<Utc>,
   pub updated_at: DateTime<Utc>,
 }
+
+#[derive(Insertable)]
+#[table_name = "users"]
+pub struct InsertUser {
+  pub nickname: String,
+  pub email: String,
+  pub password: String,
+}

@@ -9,6 +9,8 @@ mod send_buy_order_service;
 mod send_sell_order_service;
 mod trader_balance_log_service;
 mod trader_repo;
+mod user_repo;
+mod user_service;
 
 pub use card_repo::CardRepository;
 pub use domain_registry::{DomainRegistry, DOMAIN_REGISTRY};
@@ -20,3 +22,5 @@ pub use send_buy_order_service::SendBuyOrderService;
 pub use send_sell_order_service::SendSellOrderService;
 pub use trader_balance_log_service::TraderBalanceLogService;
 pub use trader_repo::TraderRepository;
+pub use user_repo::UserRepository;
+pub use user_service::UserService;

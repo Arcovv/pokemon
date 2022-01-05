@@ -4,7 +4,7 @@ use once_cell::sync::OnceCell;
 
 use crate::{
   CardRepository, MatchmakingService, OrderQueryCommands, OrderRepository, SendBuyOrderService,
-  SendSellOrderService, TraderBalanceLogService, TraderRepository,
+  SendSellOrderService, TraderBalanceLogService, TraderRepository, UserRepository, UserService,
 };
 
 pub static DOMAIN_REGISTRY: OnceCell<RwLock<Box<dyn DomainRegistry>>> = OnceCell::new();
@@ -18,4 +18,6 @@ pub trait DomainRegistry: Sync + Send {
   fn send_sell_order_service(&self) -> Box<dyn SendSellOrderService>;
   fn trader_balance_log_service(&self) -> Box<dyn TraderBalanceLogService>;
   fn trader_repository(&self) -> Box<dyn TraderRepository>;
+  fn user_repository(&self) -> Box<dyn UserRepository>;
+  fn user_service(&self) -> Box<dyn UserService>;
 }
