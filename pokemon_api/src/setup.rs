@@ -1,17 +1,17 @@
 use std::sync::RwLock;
 
 use pokemon_infrastructure::repo::{
-  DieselCardRepository, DieselOrderRepository, DieselTraderRepository,
+  DieselCardRepository, DieselOrderRepository, DieselTraderRepository, DieselUserRepository,
 };
 use pokemon_infrastructure::service::{
   DieselTraderBalanceLogService, ImplMatchmakingService, ImplSendBuyOrderService,
-  ImplSendSellOrderService,
+  ImplSendSellOrderService, ImplUserService,
 };
 use pokemon_infrastructure::{db_helper, DieselOrderQueryCommands, PgConnectionPool};
 use pokemon_service::{
   CardRepository, DomainRegistry, MatchmakingService, OrderQueryCommands, OrderRepository,
   SendBuyOrderService, SendSellOrderService, TraderBalanceLogService, TraderRepository,
-  DOMAIN_REGISTRY,
+  UserService, DOMAIN_REGISTRY,
 };
 
 pub fn setup() {
@@ -68,6 +68,16 @@ impl DomainRegistry for AppDomainRegistry {
 
   fn trader_repository(&self) -> Box<dyn TraderRepository> {
     let repo = DieselTraderRepository::new(self.pool.clone());
+
+    Box::new(repo)
+  }
+
+  fn user_service(&self) -> Box<dyn UserService> {
+    Box::new(ImplUserService)
+  }
+
+  fn user_repository(&self) -> Box<dyn pokemon_service::UserRepository> {
+    let repo = DieselUserRepository::new(self.pool.clone());
 
     Box::new(repo)
   }

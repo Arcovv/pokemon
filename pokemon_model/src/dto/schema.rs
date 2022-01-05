@@ -34,8 +34,8 @@ table! {
 table! {
     traders_balance_logs (id) {
         id -> Int8,
-        current_value -> Int4,
         previous_value -> Int4,
+        current_value -> Int4,
         modify_value -> Int4,
         reason -> Text,
         created_at -> Timestamptz,

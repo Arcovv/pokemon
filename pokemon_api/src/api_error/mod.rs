@@ -1,4 +1,5 @@
 mod from;
+mod values;
 
 use std::num::NonZeroU16;
 
@@ -6,8 +7,9 @@ use actix_web::http::StatusCode;
 use actix_web::{HttpResponse, ResponseError};
 use serde::Serialize;
 use thiserror::Error;
+pub use values::*;
 
-#[derive(Debug, Error, Serialize)]
+#[derive(Debug, Clone, Error, Serialize)]
 #[error("ApiError [status_code: {status_code}, error_code: {error_code}, reason: {reason} ]")]
 pub struct ApiError {
   status_code: NonZeroU16,

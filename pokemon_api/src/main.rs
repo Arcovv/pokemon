@@ -2,14 +2,20 @@
 extern crate log;
 
 mod api_error;
+mod config;
 mod matchmaking;
+mod prelude;
 mod router;
 mod setup;
+mod token;
 mod trader;
+mod user;
 
-use std::{env, io};
+use std::io;
 
-use actix_web::{middleware, App, HttpServer};
+use actix_web::{middleware, web, App, HttpServer};
+use config::Config;
+use envconfig::Envconfig;
 
 #[actix_web::main]
 async fn main() -> io::Result<()> {
@@ -18,15 +24,17 @@ async fn main() -> io::Result<()> {
 
   setup::setup();
 
-  let host = env::var("HOST").expect("Missing HOST env");
+  let config = Config::init_from_env().expect("Failed to load config");
+  let addr = config.addr();
 
   HttpServer::new(move || {
     App::new()
+      .app_data(web::Data::new(config.clone()))
       .configure(router::config)
       .wrap(middleware::Logger::default())
   })
   .workers(4)
-  .bind(&format!("{}:8666", host))
+  .bind(&addr)
   .unwrap()
   .run()
   .await
