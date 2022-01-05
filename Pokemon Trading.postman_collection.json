@@ -9,9 +9,15 @@
 			"name": "Fetch orders by trader id",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "default"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8666/api/traders/1/orders",
+					"raw": "http://localhost:8666/api/traders/orders",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -20,7 +26,6 @@
 					"path": [
 						"api",
 						"traders",
-						"1",
 						"orders"
 					]
 				}
@@ -139,6 +144,78 @@
 						"matchmaking",
 						"cards",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"arcofz@gmail.com\",\n    \"password\": \"111\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8666/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8666",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nickname\": \"Arco\",\n    \"email\": \"arcofz@gmail.com\",\n    \"password\": \"111\",\n    \"password_again\": \"111\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8666/api/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8666",
+					"path": [
+						"api",
+						"users",
+						"register"
 					]
 				}
 			},
